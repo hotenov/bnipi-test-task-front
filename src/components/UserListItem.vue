@@ -88,10 +88,7 @@ function updateUser() {
   if (isEmpty(diffCompany)) {
     delete updated.company
   }
-  console.log(`All data for user with ID: ${id}`)
-  console.log(JSON.stringify(currentData, null, 2));
-  console.log("Only changes:")
-  console.log(JSON.stringify(updated, null, 2));
+
   const alertMessage = `
 These properties were changed for User ID: ${id}
 (only updated values as JSON string)
