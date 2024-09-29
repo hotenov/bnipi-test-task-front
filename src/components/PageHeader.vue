@@ -12,6 +12,12 @@
 <style scoped>
 .header-text {
   color: var(--color-text);
+  color: #696969;
+  margin: 24px 51px;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23.44px;
 }
 
 hr {

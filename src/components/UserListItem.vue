@@ -86,10 +86,12 @@ ${JSON.stringify(diffData, null, 2)}
 <template>
   <details>
     <summary>
-      <div>{{ props.item.name }}</div>
-      <div>{{ props.item.email }}</div>
-      <div>{{ props.item.phone }}</div>
-      <div>{{ props.item.website }}</div>
+      <div class="item-header">
+        <div>{{ props.item.name }}</div>
+        <div>{{ props.item.email }}</div>
+        <div>{{ props.item.phone }}</div>
+        <div>{{ props.item.website }}</div>
+      </div>
     </summary>
     <form @submit.prevent="updateUser">
       <div class="info-container">
@@ -159,29 +161,42 @@ details[open] summary:before {
 }
 
 details > summary {
-  display: grid;
-  grid-template-columns: 250px repeat(4, 1fr);
+  display: flex;
   align-items: center;
+  height: 40px;
   position: relative;
   width: 100%;
   cursor: pointer;
   list-style: none;
   border: 1px solid #ffd200;
   border-radius: 4px;
-  padding: 14px 0 15px 22px;
+  padding: 14px 0 14px 4px;
 }
 
 /* custom marker */
 summary::before {
+  display: block;
+  flex-shrink: 0;
   content: "";
-  left: 0;
-  top: .8em;
-  position: absolute;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10.6' height='20.2' fill='none'%3E%3Cpath fill='%23ffd300' fill-rule='evenodd' d='M.275 1.22 1.11.293c.31-.34.77-.34 1.07 0L10.4 9.33c.2.25.2.5.2.77 0 .3 0 .6-.2.8l-8.22 9c-.3.3-.76.3-1.07 0L.275 19c-.3-.4-.3-.9 0-1.2L7.35 10 .275 2.32c-.3-.34-.3-.84 0-1.18z' clip-rule='evenodd'/%3E%3C/svg%3E") no-repeat 50% 50% / .5em .9em;
-  width: 1em;
-  height: 1em;
+  /* left: 0; */
+  /* top: .8em; */
+  /* position: absolute; */
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10.6' height='20.2' fill='none'%3E%3Cpath fill='%23ffd300' fill-rule='evenodd' d='M.275 1.22 1.11.293c.31-.34.77-.34 1.07 0L10.4 9.33c.2.25.2.5.2.77 0 .3 0 .6-.2.8l-8.22 9c-.3.3-.76.3-1.07 0L.275 19c-.3-.4-.3-.9 0-1.2L7.35 10 .275 2.32c-.3-.34-.3-.84 0-1.18z' clip-rule='evenodd'/%3E%3C/svg%3E") no-repeat 50% 50% / .5em 1.4em;
+  width: 10.52px;
+  height: 20.18px;
+  margin-left: 11.47px;
+  margin-right: 19.43px;
   transition: transform .1s linear;
   -webkit-transition: transform .1s linear;
+}
+
+summary > .item-header {
+  display: grid;
+  grid-template-columns: 300px 350px 270px 250px;
+  align-items: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.41px;
 }
 
 details > p {

@@ -14,7 +14,6 @@ const baseApiUrl = "https://jsonplaceholder.typicode.com"
     <template v-slot:content>
       <UserList :api-url="baseApiUrl">
         <template v-slot:user="{ id }">
-          <p>ID: {{ id }}</p>
         </template>
       </UserList>
     </template>
