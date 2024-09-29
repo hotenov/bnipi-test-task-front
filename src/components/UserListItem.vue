@@ -95,46 +95,48 @@ ${JSON.stringify(diffData, null, 2)}
     </summary>
     <form @submit.prevent="updateUser">
       <div class="info-container">
-        <div>
-          <div>Address</div>
-          <div>
-            <label for="user-street">Street</label>
-            <input id="user-street" v-model="street" />
-            <label for="user-suite">Suite</label>
-            <input id="user-suite" v-model="suite" />
-            <label for="user-city">City</label>
-            <input id="user-city" v-model="city" />
-            <label for="user-zipcode">Zipcode</label>
-            <input id="user-zipcode" v-model="zipcode" />
+        <div class="info">
+          <div class="info-section">
+            <div class="title">Address</div>
+            <div class="section-data">
+              <label for="user-street">Street</label>
+              <input id="user-street" v-model="street" />
+              <label for="user-suite">Suite</label>
+              <input id="user-suite" v-model="suite" />
+              <label for="user-city">City</label>
+              <input id="user-city" v-model="city" />
+              <label for="user-zipcode">Zipcode</label>
+              <input id="user-zipcode" v-model="zipcode" />
+            </div>
+          </div>
+          <div class="info-section">
+            <div class="title">Company</div>
+            <div class="section-data">
+              <label for="user-company-name">Name</label>
+              <input id="user-company-name" v-model="company" />
+              <label for="user-company-catch-phrase">CatchPhrase</label>
+              <input id="user-company-catch-phrase" v-model="catchPhrase" />
+              <label for="user-company-bs">Bs</label>
+              <input id="user-company-bs" v-model="bs" />
+            </div>
+          </div>
+          <div class="info-section">
+            <div class="title">Basic Info</div>
+            <div class="section-data">
+              <label for="user-name">Name</label>
+              <input id="user-name" v-model="name" />
+              <label for="user-username">Username</label>
+              <input id="user-username" v-model="userName" />
+              <label for="user-email">Email</label>
+              <input id="user-email" v-model="email" />
+              <label for="user-phone">Phone</label>
+              <input id="user-phone" v-model="phone" />
+              <label for="user-phone">Website</label>
+              <input id="user-phone" v-model="website" />
+            </div>
           </div>
         </div>
-        <div>
-          <div>Company</div>
-          <div>
-            <label for="user-company-name">Company</label>
-            <input id="user-company-name" v-model="company" />
-            <label for="user-company-catch-phrase">CatchPhrase</label>
-            <input id="user-company-catch-phrase" v-model="catchPhrase" />
-            <label for="user-company-bs">Bs</label>
-            <input id="user-company-bs" v-model="bs" />
-          </div>
-        </div>
-        <div>
-          <div>Basic Info</div>
-          <div>
-            <label for="user-name">Name</label>
-            <input id="user-name" v-model="name" />
-            <label for="user-username">Username</label>
-            <input id="user-username" v-model="userName" />
-            <label for="user-email">Email</label>
-            <input id="user-email" v-model="email" />
-            <label for="user-phone">Phone</label>
-            <input id="user-phone" v-model="phone" />
-            <label for="user-phone">Website</label>
-            <input id="user-phone" v-model="website" />
-          </div>
-          <button>Save</button>
-        </div>
+        <button class="save" type="submit"></button>
       </div>
     </form>
   </details>
@@ -143,15 +145,14 @@ ${JSON.stringify(diffData, null, 2)}
 <style scoped>
 details {
   font:
-    16px "Open Sans",
-    Calibri,
+    "Roboto",
     sans-serif;
   width: 100%;
 }
 
 details[open] {
   min-height: 2em;
-  max-height: 20em;
+  /* max-height: 20em; */
 }
 
 details[open] summary:before {
@@ -194,6 +195,7 @@ summary > .item-header {
   display: grid;
   grid-template-columns: 300px 350px 270px 250px;
   align-items: center;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 16.41px;
@@ -207,8 +209,70 @@ details > p {
 
 .info-container {
   display: grid;
-  grid-template-columns: 250px repeat(3, 1fr);
+  grid-template-columns: 1501.97px 1fr;
+  margin: 12px 31.27px 0px 31.27px;
+}
+
+.info {
+  display: flex;
   border: 1px solid #D9DBDA;
-  margin: 16px 30px;
+  border-radius: 4px;
+}
+
+.info-section {
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+  border: 1px solid #D9DBDA;
+}
+
+.info-section .title {
+  height: 40px;
+  border-bottom: 1px solid #D9DBDA;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18.75px;
+  padding: 11px 32px 10px 32px;
+}
+
+.section-data {
+  display: flex;
+  flex-flow: column;
+  padding: 23px 32px;
+}
+
+.section-data label {
+  text-transform: capitalize;
+  margin-bottom: 7px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #696969;
+}
+
+.section-data input {
+  appearance: none;
+  border: 1px solid #D9DBDA;
+  margin-bottom: 12px;
+  padding: 9px 18px 10px 17.96px;
+  text-transform: capitalize;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.41px;
+  color: #696969;
+  border-radius: 4px;
+  background: transparent;
+}
+
+button.save {
+  height: 40px;
+  margin-left: 19.77px;
+  border-radius: 4px;
+  border: none;
+  background: url("data:image/svg+xml,%3Csvg width='21' height='20' viewBox='0 0 21 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.50781 10.4894L8.76326 18.0293C9.22838 18.5126 10.0281 18.41 10.3561 17.8249L19.227 2' stroke='%235F7465' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") #FFD300 no-repeat center;
 }
 </style>

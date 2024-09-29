@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <div class="header-text">Users</div>
+    <h1 class="header-text">Users</h1>
     <hr>
   </div>
 </template>
