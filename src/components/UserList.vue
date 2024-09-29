@@ -24,6 +24,13 @@ watchEffect(async () => {
     <li v-for="(user, index) of users" :key="user.id">
       <slot name="user" v-bind="user" />
       <UserListItem :item="user"
+        v-model:street="user.address.street"
+        v-model:suite="user.address.suite"
+        v-model:city="user.address.city"
+        v-model:zipcode="user.address.zipcode"
+        v-model:company="user.company.name"
+        v-model:catch-phrase="user.company.catchPhrase"
+        v-model:bs="user.company.bs"
         v-model:name="user.name"
         v-model:user-name="user.username"
         v-model:email="user.email"

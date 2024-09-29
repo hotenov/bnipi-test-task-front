@@ -1,32 +1,70 @@
 <script setup lang="ts">
 import type { User } from './types/users';
+
 const props = defineProps<{
   item: User
 }>()
+
+// Address
+const street = defineModel("street")
+const suite = defineModel("suite")
+const city = defineModel("city")
+const zipcode = defineModel("zipcode")
+// Company
+const company = defineModel("company")
+const catchPhrase = defineModel("catchPhrase")
+const bs = defineModel("bs")
+// Basic Info
 const name = defineModel("name")
 const userName = defineModel("userName")
 const email = defineModel("email")
 const phone = defineModel("phone")
 const website = defineModel("website")
-const company = defineModel("company")
 
+// const initialData = props.item
 const initialData = {
-  name: name.value,
-  username: userName.value,
-  email: email.value,
-  phone: phone.value,
-  website: website.value
-}
+    id: props.item.id,
+    name: name.value,
+    username: userName.value,
+    email: email.value,
+    address: {
+      street: street.value,
+      suite: suite.value,
+      city: city.value,
+      zipcode: zipcode.value,
+      geo: props.item.address.geo,
+    },
+    phone: phone.value,
+    website: website.value,
+    company: {
+      name: company.value,
+      catchPhrase: catchPhrase.value,
+      bs: bs.value,
+    }
+  }
 
 function updateUser() {
   const id = props.item.id
   let currentData = Object.create(null)
   currentData = {
+    id,
     name: name.value,
     username: userName.value,
     email: email.value,
+    address: {
+      street: street.value,
+      suite: suite.value,
+      city: city.value,
+      zipcode: zipcode.value,
+      geo: props.item.address.geo,
+    },
     phone: phone.value,
-    website: website.value
+    website: website.value,
+    company: {
+      name: company.value,
+      catchPhrase: catchPhrase.value,
+      bs: bs.value,
+    }
   }
   const diffData = Object.fromEntries(Object.entries(currentData).filter(([k, v]) => initialData[k] !== v))
   console.log(`All data for user with ID: ${id}`)
@@ -53,28 +91,35 @@ ${JSON.stringify(diffData, null, 2)}
       <div>{{ props.item.phone }}</div>
       <div>{{ props.item.website }}</div>
     </summary>
-    <div class="info-container">
-      <div>
-        <div>Address</div>
+    <form @submit.prevent="updateUser">
+      <div class="info-container">
         <div>
-          <p>{{ props.item.address.street }}</p>
-          <p>{{ props.item.address.suite }}</p>
-          <p>{{ props.item.address.city }}</p>
-          <p>{{ props.item.address.zipcode }}</p>
+          <div>Address</div>
+          <div>
+            <label for="user-street">Street</label>
+            <input id="user-street" v-model="street" />
+            <label for="user-suite">Suite</label>
+            <input id="user-suite" v-model="suite" />
+            <label for="user-city">City</label>
+            <input id="user-city" v-model="city" />
+            <label for="user-zipcode">Zipcode</label>
+            <input id="user-zipcode" v-model="zipcode" />
+          </div>
         </div>
-      </div>
-      <div>
-        <div>Company</div>
         <div>
-          <p>{{ props.item.company.name }}</p>
-          <p>{{ props.item.company.catchPhrase }}</p>
-          <p>{{ props.item.company.bs }}</p>
+          <div>Company</div>
+          <div>
+            <label for="user-company-name">Company</label>
+            <input id="user-company-name" v-model="company" />
+            <label for="user-company-catch-phrase">CatchPhrase</label>
+            <input id="user-company-catch-phrase" v-model="catchPhrase" />
+            <label for="user-company-bs">Bs</label>
+            <input id="user-company-bs" v-model="bs" />
+          </div>
         </div>
-      </div>
-      <div>
-        <div>Basic Info</div>
         <div>
-          <form @submit.prevent="updateUser">
+          <div>Basic Info</div>
+          <div>
             <label for="user-name">Name</label>
             <input id="user-name" v-model="name" />
             <label for="user-username">Username</label>
@@ -85,11 +130,11 @@ ${JSON.stringify(diffData, null, 2)}
             <input id="user-phone" v-model="phone" />
             <label for="user-phone">Website</label>
             <input id="user-phone" v-model="website" />
-            <button>Save</button>
-          </form>
+          </div>
+          <button>Save</button>
         </div>
       </div>
-    </div>
+    </form>
   </details>
 </template>
 
