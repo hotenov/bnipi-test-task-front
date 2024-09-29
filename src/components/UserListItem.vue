@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { User } from './types/users';
+import type { User } from './types/users'
+import { isEmpty } from "./utils";
 
 const props = defineProps<{
   item: User
@@ -21,7 +22,7 @@ const email = defineModel("email")
 const phone = defineModel("phone")
 const website = defineModel("website")
 
-// const initialData = props.item
+// Remember initial properties values for a user
 const initialData = {
     id: props.item.id,
     name: name.value,
@@ -66,17 +67,36 @@ function updateUser() {
       bs: bs.value,
     }
   }
-  const diffData = Object.fromEntries(Object.entries(currentData).filter(([k, v]) => initialData[k] !== v))
+
+  // Dummy code for comparing properties and nested properties
+  // TODO: Refactor in the future (find a proper way)
+  // Ignore ts-plugin warnings for now
+  const diffBasic = Object.fromEntries(Object.entries(currentData).filter(([k, v]) => initialData[k] !== v))
+  delete diffBasic.address
+  delete diffBasic.company
+  const diffAddress = Object.fromEntries(Object.entries(currentData.address).filter(([k, v]) => initialData.address[k] !== v))
+  const diffCompany = Object.fromEntries(Object.entries(currentData.company).filter(([k, v]) => initialData.company[k] !== v))
+  let updated = Object.create(null)
+  updated = {
+    ...diffBasic,
+    address: diffAddress,
+    company: diffCompany,
+  }
+  if (isEmpty(diffAddress)) {
+    delete updated.address // @ts-ignore
+  }
+  if (isEmpty(diffCompany)) {
+    delete updated.company
+  }
   console.log(`All data for user with ID: ${id}`)
   console.log(JSON.stringify(currentData, null, 2));
   console.log("Only changes:")
-  console.log(JSON.stringify(diffData, null, 2));
-  console.log("Simulate Send PUT request with object:")
+  console.log(JSON.stringify(updated, null, 2));
   const alertMessage = `
 These properties were changed for User ID: ${id}
-(only new values on this alert)
+(only updated values as JSON string)
 
-${JSON.stringify(diffData, null, 2)}
+${JSON.stringify(updated, null, 2)}
 `
   alert(alertMessage)
 }
